@@ -1,0 +1,120 @@
+<template name="login">
+	Sing in
+	<form>
+    <div>
+      <input type="email" name="email" required />
+      <br>
+      <input type="password" name="password" required />
+      <br>
+      <input type="submit" id="login-button" value="Sign in" />
+    </div>
+   </form> 
+
+</template>
+
+
+<template name="register" >
+	
+	<form>
+	Sing up
+    <div>
+    fist name:
+      <br>
+      <input type="text" name="firstName" required >
+      <br>
+    last name:
+      <br>
+      <input type="text" name="lastName" required >
+      <br>
+
+  	Email:
+  	  <br>
+      <input type="email" name="email" required >
+      <br>
+    Password:
+      <br>
+      <input type="password" name="password" required>
+      <br>
+      <input type="submit"  value="Sign in" />
+    </div>
+   </form> 
+
+
+</template>
+
+
+
+
+<template name="navigation">
+	<ul>
+	<a href="{{pathFor route='home'}}">Home</a>
+	{{#if currentUser}}
+	<a href="#" class="logout">Logout</a>
+  <a href="{{pathFor route='users'}}">Users</a>
+	{{else}}
+	<a href="{{pathFor route='register'}}">Register</a>
+	<a href="{{pathFor route='login'}}">Login</a>
+	
+	{{/if}}
+
+	</ul>
+</template>
+
+
+
+<template name="user">
+  <div>
+  <h2>
+   {{this.profile.firstName}} {{this.profile.lastName}}
+   <a href="#" class="btn btn-success startDialog"><span class="glyphicon glyphicon-envelope"></span> send message</a> 
+  </h2>
+  </div>
+
+</template>
+
+
+<template name="users">
+  {{#if currentUser}}
+    {{#each users}}
+        {{>user}}
+    {{/each}}
+  {{/if}}
+</template>
+
+<template name="main">
+	{{> navigation}}
+	{{> yield}}
+
+</template>
+
+<template name="home" >
+  welcome!!! {{currentUser.profile.firstName}}
+  
+
+  {{> dialogs}}
+</template>
+
+
+
+<template name="dialogs">
+  
+    <div class="row">
+  <div class="span9">
+    Your dialogs
+    <div class="row">
+
+      <div class="span3 dialogPartner">
+      
+      </div>
+
+      <div class="span6 dialogArea">
+      
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+  
+</template>
+
