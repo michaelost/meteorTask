@@ -51,10 +51,12 @@ Template.dialogs.events({
 	}
 }) 
 
+/*
 Template.messages.helplers({
 	'mess': function () {
 		
 		var index = -1;
+		
 		Meteor.user().profile.dialogs.forEach(function (n) {
 			index ++;
 
@@ -66,10 +68,11 @@ Template.messages.helplers({
 			}
 		});
 		
+		return 1;
 	}
 });
 
-
+*/
 
 
 Template.register.events({
@@ -88,6 +91,7 @@ Template.register.events({
         	if(error) {
         		console.log(error.reason);
         	} else {
+        		console.log("everything is ok");
         		var currentRoute = Router.current().route().getName();
         		if (currentRoute == "login") {
         			Router.go('/home');
@@ -182,7 +186,7 @@ Template.register.onRendered(function (){
 });
 
 
-
+/*
 $.validator.setDefault({
 	rules: {
 		email: {
@@ -205,3 +209,5 @@ $.validator.setDefault({
 		}
 	}
 });
+
+*/
