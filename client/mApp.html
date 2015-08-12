@@ -96,6 +96,19 @@
 
 
 
+
+<template name="currentDialogMessages">
+  here will be current dialog messages
+  {{#each mess}}
+    {{this.text}}
+  {{/each}}
+</template>
+
+
+
+
+
+
 <template name="dialogs">
   
     <div class="row">
@@ -111,7 +124,7 @@
 
       <div class="span6 dialogArea">
           <div class="messages">
-            {{>messages}}
+            {{>currentDialogMessages}}
           </div>
           <div class="inputArea">
               <textarea name="" id=""></textarea>
@@ -124,14 +137,3 @@
   
 </template>
 
-
-<template name="messages">
-  {{#each mess}}
-    <div>
-          <h5>{{sender}}</h5>
-          <h4>{{text}}</h4>
-          <p> {{sentAt}} </p>
-    </div>
-  
-  {{/each}}
-</template>

@@ -59,6 +59,18 @@ Meteor.methods({
 		 }
 		 
 		  
+	},
+
+	'getDialog': function (partnerID) {
+		
+		var user = Meteor.users.findOne({_id: Meteor.userId()});
+		user.profile.dialogs.forEach(function (n) {
+			
+			if (n.partnerId == partnerID) { 
+				console.log(n.messages);
+				return n.messages;
+			}
+		});
 	}
 
 })

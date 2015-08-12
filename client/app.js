@@ -16,6 +16,8 @@ Template.dialogs.events({
 		
 		sessionStorage.setItem('selectedPartner',this.partnerId);
 		console.log(sessionStorage.selectedPartner + " selected parther");
+	Meteor.call('getDialog',sessionStorage.selectedPartner);
+
 	},
 	'keydown textarea' : function (event) {
 		console.log(event.keyCode);
@@ -49,7 +51,11 @@ Template.dialogs.events({
 			$('textarea').val("");
 		}
 	}
-}) 
+}); 
+
+
+
+
 
 /*
 Template.messages.helplers({
@@ -211,3 +217,23 @@ $.validator.setDefault({
 });
 
 */
+
+
+Template.currentDialogMessages.helpers({
+	'mess' : function () {
+
+		var index = 0, opa = 0;
+		Meteor.user().profile.dialogs.forEach(function (n) {
+			
+			if (n.partnerId == sessionStorage.selectedPartner) { 
+				opa = index;
+			} 
+			index++;
+		});
+
+		return 	Meteor.user().profile.dialogs[opa].messages;
+		console.log("mess is called");
+		return Meteor.call('getDialog',sessionStorage.selectedPartner);
+
+	}
+});
