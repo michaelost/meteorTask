@@ -105,13 +105,17 @@
 
       <div class="span3 dialogPartner">
           {{#each dialogs}}
-            {{this}}
+            <div class="partner">{{name}}</div>
           {{/each}}
       </div>
 
       <div class="span6 dialogArea">
-      
-
+          <div class="messages">
+            {{>messages}}
+          </div>
+          <div class="inputArea">
+              <textarea name="" id=""></textarea>
+          </div>
       </div>
       
     </div>
@@ -120,3 +124,14 @@
   
 </template>
 
+
+<template name="messages">
+  {{#each mess}}
+    <div>
+          <h5>{{sender}}</h5>
+          <h4>{{text}}</h4>
+          <p> {{sentAt}} </p>
+    </div>
+  
+  {{/each}}
+</template>

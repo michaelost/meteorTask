@@ -10,6 +10,65 @@ Template.dialogs.helpers({
 	}
 });
 
+Template.dialogs.events({
+	'click .partner' : function (event) {
+		event.preventDefault();
+		
+		sessionStorage.setItem('selectedPartner',this.partnerId);
+		console.log(sessionStorage.selectedPartner + " selected parther");
+	},
+	'keydown textarea' : function (event) {
+		console.log(event.keyCode);
+		if (event.keyCode == 13) {
+			var message = {
+				sender: Meteor.user().profile.firstName +" "+ Meteor.user().profile.lastName,
+				text: $('textarea').val(),
+				sentAt: new Date()
+			}
+			/*
+			Meteor.users.update({
+		'_id': Meteor.userId(),
+		'profile.dialogs' : { $elemMatch: { 'partnerId' : sessionStorage.selectedPartner } }
+			},{
+		$push :{ "profile.dialogs.$.messages": message }})
+			*/
+			Meteor.call('sendMessage',sessionStorage.selectedPartner,message);
+			console.log(sessionStorage.selectedPartner);
+			
+			/*
+			Meteor.user().profile.dialogs[sessionStorage.partnerIndex].messages.push(message)
+			*/
+
+
+
+
+
+			console.log(message);
+
+
+			$('textarea').val("");
+		}
+	}
+}) 
+
+Template.messages.helplers({
+	'mess': function () {
+		
+		var index = -1;
+		Meteor.user().profile.dialogs.forEach(function (n) {
+			index ++;
+
+			sessionStorage.setItem('selectedPartner',this.partnerId);
+			if (n.parthner_id == sessionStorage.selectedParthner ) {
+				sessionStorage.setItem('partnerIndex',index);
+
+				return n.messages; 
+			}
+		});
+		
+	}
+});
+
 
 
 

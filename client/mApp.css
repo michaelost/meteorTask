@@ -1,7 +1,49 @@
 .dialogPartner {
 	background-color: black;
+	color: white;
+	font-size: 25px;
 	
 }
+
+.dialogPartner div {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	cursor: pointer;
+	font-style: Arial;
+
+}
+.dialogPartner div:hover {
+	background-color: white;
+	color: black;
+	transition: 0.5s;
+
+}
+
 .dialogArea {
 	background-color: gray;
+	height: 300px;
+	position: relative;
+
+
+}
+
+
+.messages {
+	height: 250px;
+	width: 100%;
+	position: relative;
+	
+}
+
+.inputArea {
+	height: 50px;
+	width: 100%;
+	position: relative;
+	background-color: white;
+	
+}
+
+textarea {
+	width: 100%;
+	height: 100%;
 }
