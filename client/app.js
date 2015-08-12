@@ -58,8 +58,12 @@ Template.user.events({
 		if (us.profile.dialogs) {
 
 			var doesDialogExist = false;
+			var id = this._id;
+
 			us.profile.dialogs.forEach(function (n) {
-				if (n.partnerId == this._id) {
+				console.log("parthner_id" + n.partnerId);
+				console.log("this id - " + id);
+				if (n.partnerId == id) {
 					doesDialogExist = true;
 				}
 			});
@@ -72,7 +76,7 @@ Template.user.events({
 	 						messages: []
 	 					}
 	 				}});
-				}
+				} 
 	
 
 		} else {
