@@ -8,7 +8,8 @@ Template.dialogs.helpers({
 	'dialogs' : function () {
 		return Meteor.user().profile.dialogs
 	}
-})
+});
+
 
 
 
@@ -55,15 +56,32 @@ Template.user.events({
 
 	var us =	Meteor.users.findOne({_id: currentUser});
 		if (us.profile.dialogs) {
-	 		if (us.profile.dialogs.indexOf(this._id) == -1) {
+
+			var doesDialogExist = false;
+			us.profile.dialogs.forEach(function (n) {
+				if (n.partnerId == this._id) {
+					doesDialogExist = true;
+				}
+			});
+	 		if (!doesDialogExist) {
 	 	 		Meteor.users.update({_id: currentUser}, 
-	 				{$push : {'profile.dialogs' : this._id}});
+	 				{$push : {
+	 					'profile.dialogs' : {
+	 						partnerId: this._id,
+	 						name: this.profile.firstName + " " + this.profile.lastName,
+	 						messages: []
+	 					}
+	 				}});
 				}
 	
 
 		} else {
 	 	 	Meteor.users.update({_id: currentUser}, 
-	 			{$set : {'profile.dialogs' : [this._id]}});
+	 			{$set : {'profile.dialogs' : [{
+	 										   partnerId: this._id,
+	 										   name: this.profile.firstName + " " + this.profile.lastName,
+	 										   messages: []
+	 										 }]}});
 	
 		}
 	 
