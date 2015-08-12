@@ -4,6 +4,13 @@ Template.users.helpers({
 	}
 });
 
+Template.dialogs.helpers({
+	'dialogs' : function () {
+		return Meteor.user().profile.dialogs
+	}
+})
+
+
 
 Template.register.events({
     'submit form': function(event){
@@ -43,26 +50,26 @@ Template.navigation.events({
 
 Template.user.events({
 	'click .startDialog' : function (event) {
-		event.preventDefault();
-	 var currentUser = Meteor.userId();
+	event.preventDefault();
+	var currentUser = Meteor.userId();
 
 	var us =	Meteor.users.findOne({_id: currentUser});
-	 if (us.profile.dialogs) {
-	 	 Meteor.users.update(
-	 	{_id: currentUser}, 
-	 	{$push : {'profile.dialogs' : this._id}})
-	
+		if (us.profile.dialogs) {
+	 		if (us.profile.dialogs.indexOf(this._id) == -1) {
+	 	 		Meteor.users.update({_id: currentUser}, 
+	 				{$push : {'profile.dialogs' : this._id}});
+				}
 	
 
-	 } else {
-	 	 Meteor.users.update(
-				{_id: currentUser}, 
+		} else {
+	 	 	Meteor.users.update({_id: currentUser}, 
 	 			{$set : {'profile.dialogs' : [this._id]}});
 	
-	}
+		}
 	 
 	 console.log(us);
 	 console.log(this.profile.firstName);
+	Router.go('/home');
 	}
 	
 })
