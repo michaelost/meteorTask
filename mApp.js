@@ -45,3 +45,9 @@ Router.route('/added_4th', {
   template: '4th',
   name: '4th'
 })
+
+
+Router.route('/added_5th', {
+  template: '5th',
+  name: '5th'
+})
