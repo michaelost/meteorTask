@@ -27,3 +27,8 @@ Router.route('/added_first', {
   template: 'first',
   name: 'first'
 })
+
+Router.route('/added_second', {
+  template: 'second',
+  name: 'sedond'
+})
