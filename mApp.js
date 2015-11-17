@@ -22,3 +22,8 @@ Router.route('/home',{
 Router.configure({
     layoutTemplate: 'main'
 });
+
+Router.route('/added_first', {
+  template: 'first',
+  name: 'first'
+})
